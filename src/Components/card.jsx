@@ -1,5 +1,5 @@
 
-export default function Card({ index, value, deleteClick, editClick, edit }) {
+export default function Card({ index, value, deleteClick, editClick, }) {
   return (
     <div>
       <div
@@ -8,7 +8,7 @@ export default function Card({ index, value, deleteClick, editClick, edit }) {
       >
         <div className="my-auto mr-2">{index + 1}</div>
 
-        <div className="my-auto fontsemibold">
+        <div className="my-auto font-semibold">
           <input
             //   id={value}
             type="text"
@@ -17,7 +17,7 @@ export default function Card({ index, value, deleteClick, editClick, edit }) {
               //   console.log(e.target.value);
             }}
             placeholder=""
-            className="input input-sm input-bordered w-full max-w-xs"
+            className="input input-sm bg-black input-bordered w-full max-w-xs"
           />
         </div>
         <div className="flex flex-row-reverse w-[10%] ml-auto ">

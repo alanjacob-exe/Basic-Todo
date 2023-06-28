@@ -3,11 +3,9 @@ import Card from "../Components/card";
 
 export default function Home() {
   const [todoNotes, settodoNotes] = useState([]);
-  const [edit, setedit] = useState(false);
   const [indexValue, setindexValue] = useState();
   const [updateValue, setupdateValue] = useState("");
   const [note, setnote] = useState("");
-  const [updatedValue, setupdatedValue] = useState("");
 
   // console.log(indexValue + "index");
   const handlePush = (item) => {
@@ -16,10 +14,14 @@ export default function Home() {
   };
 
   const handleDelete = (params) => {
-    const index = todoNotes.indexOf(params);
-    const dummy = [...todoNotes];
-    dummy.splice(index, 1);
-    settodoNotes([...dummy]);
+    console.log("params" + params);
+    const deletedArray = todoNotes.filter((item, index) => index !== params);
+    console.log(deletedArray);
+    settodoNotes([...deletedArray]);
+    // const index = todoNotes.indexOf(params);
+    // const dummy = [...todoNotes];
+    // dummy.splice(index, 1);
+    // settodoNotes([...dummy]);
   };
 
   const handleUpdate = (index, value) => {
@@ -54,7 +56,7 @@ export default function Home() {
                 setnote(e.target.value);
               }}
               placeholder="Type here"
-              className="input input-primary w-full mb-2 "
+              className="input bg-black text-white input-primary w-full mb-2 "
             />
           </div>
           <div>
@@ -75,19 +77,18 @@ export default function Home() {
               value={value}
               key={index}
               deleteClick={() => {
-                handleDelete(value);
+                handleDelete(index);
               }}
               editClick={() => {
                 setindexValue(index);
 
                 window.my_modal_1.showModal();
               }}
-              edit={edit}
             />
           ))}
         </div>
       </section>
-      <dialog id="my_modal_1" className="modal">
+      <dialog data-theme="dark" id="my_modal_1" className="modal">
         <form method="dialog" className="modal-box">
           <h3 className="font-bold text-lg flex w-full h-full">Update Value</h3>
           <div className="w-full h-ful">
@@ -98,13 +99,13 @@ export default function Home() {
               onChange={(e) => {
                 setupdateValue(e.target.value);
               }}
-              className="input my-2 input-bordered input-primary w-full "
+              className="input bg-black text-white my-2 input-bordered input-primary w-full "
             />
           </div>
           <div className="modal-action">
             {/* if there is a button in form, it will close the modal */}
             <button
-              className="btn"
+              className="btn btn-primary"
               onClick={() => {
                 handleUpdate(indexValue, updateValue);
               }}
