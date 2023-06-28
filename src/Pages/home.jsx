@@ -14,21 +14,26 @@ export default function Home() {
   };
 
   const handleDelete = (params) => {
-    console.log("params" + params);
-    const deletedArray = todoNotes.filter((item, index) => index !== params);
-    console.log(deletedArray);
-    settodoNotes([...deletedArray]);
+    return todoNotes.filter((item, index) => index !== params);
+
     // const index = todoNotes.indexOf(params);
     // const dummy = [...todoNotes];
     // dummy.splice(index, 1);
     // settodoNotes([...dummy]);
   };
 
-  const handleUpdate = (index, value) => {
-    console.log(index, value);
-    const dummy = [...todoNotes];
-    dummy.splice(index, 1, value);
-    settodoNotes([...dummy]);
+  const handleUpdate = (pos, val) => {
+    return todoNotes.map((value, i) => {
+      if (i == pos) {
+        value = val;
+      }
+      return value;
+    });
+    // settodoNotes([...todoNotes])
+    // console.log(index, value);
+    // const dummy = [...todoNotes];
+    // dummy.splice(index, 1, value);
+    // settodoNotes([...dummy]);
   };
 
   //   const handle1 = () => {
@@ -77,7 +82,7 @@ export default function Home() {
               value={value}
               key={index}
               deleteClick={() => {
-                handleDelete(index);
+                settodoNotes([...(handleDelete(index))])
               }}
               editClick={() => {
                 setindexValue(index);
@@ -107,7 +112,7 @@ export default function Home() {
             <button
               className="btn btn-primary"
               onClick={() => {
-                handleUpdate(indexValue, updateValue);
+                settodoNotes([...handleUpdate(indexValue, updateValue)]);
               }}
             >
               update
